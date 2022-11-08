@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.sql": "sql",
+        "hash-tables.h": "c",
+        "main.h": "c"
+    }
+}

@@ -1,18 +1,20 @@
 #include "../headers/main.h"
 
+
+
+
 int main(void)
 {
 
-    // char data[] = {"zzzzzzzzzzzzzzz"};
-    // printf("%i\n", get_hash_key(&data[0]));
-
+   
     ghash_table_t *hash_table = create_hash_table(KEYS_STORE_LENGTH);
 
     loadTo_hash_table(&hash_table, "./ressources/words.txt");
 
-    bool search_resault = searchIn_hash_table(&hash_table, "car");
-   
-    printf("%s\n", search_resault ? "found" : "not found");
+
+    // bool search_resault = searchIn_hash_table(&hash_table, "car");
+
+    // printf("%s\n", search_resault ? "found" : "not found");
 
     destroy_hash_table(&hash_table);
 

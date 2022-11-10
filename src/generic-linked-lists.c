@@ -42,6 +42,26 @@ void push_glist(glist_t **head, void *val, size_t val_size)
     }
 }
 
+void print_glist(glist_t **head, void (*printer)(void * data))
+{
+	assert(head != NULL);
+	assert(*head != NULL);
+
+
+	glist_t * traversal = *head;
+
+	while(traversal->next != NULL)
+	{
+		(*printer)(traversal->data);
+		traversal = traversal->next;
+	}
+}
+
+
+
+
+
+
 void destroy_glist(glist_t **head)
 {
     assert(head != NULL);
@@ -83,6 +103,7 @@ bool searchIn_glist(glist_t **head, void *data, int (*cmp)(void *first, void *se
     while (traversal->next != NULL)
     {
         // compare the elements
+        printf("> cmp :%i\n", (*cmp)(traversal->data, data));
         if ((*cmp)(traversal->data, data) == 0)
         {
             return true;
@@ -90,7 +111,6 @@ bool searchIn_glist(glist_t **head, void *data, int (*cmp)(void *first, void *se
         // increment the traversal
         traversal = traversal->next;
     }
-
     return false;
 }
 
@@ -356,6 +376,17 @@ void swap_glist_str(glist_t *first, glist_t *second)
 
     ((char *)first->data)[strlen(buffer)] = '\0';
 }
+
+
+
+void print_str(char * data)
+{
+	assert(data != NULL);
+
+	printf("%s\n", data);
+}
+
+
 
 /** TO DEBUG*/
 

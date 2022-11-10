@@ -60,6 +60,11 @@ void insertTo_hash_table(ghash_table_t **phash_table, char *data)
 
     int hash = get_hash_key(data);
 
+    char buffer[strlen(data) + 1];
+
+    strcpy(buffer, data);
+    buffer[strlen(data)] = '\0';
+
     push_glist(&((*phash_table)->keys_store[hash]), data, strlen(data) + 1);
 }
 
@@ -74,11 +79,19 @@ void loadTo_hash_table(ghash_table_t **phash_table, const char *filename)
     assert(file != NULL);
 
     char buffer[34];
+    char *data;
 
     while (!feof(file))
     {
         fgets(buffer, 32, file);
-        insertTo_hash_table(phash_table, buffer);
+
+        data = malloc((strlen(buffer) + 1) * sizeof(char));
+
+        data[strlen(buffer)] = '\0';
+
+        insertTo_hash_table(phash_table, data);
+
+        free(data);
     }
 
     fclose(file);

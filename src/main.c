@@ -7,6 +7,7 @@ int main(void)
 
     loadTo_hash_table(&hash_table, "./ressources/words.txt");
 
+    print_hash_table(&hash_table);
 
     bool search_resault = searchIn_hash_table(&hash_table, "car");
 

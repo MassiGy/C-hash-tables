@@ -12,6 +12,21 @@ ghash_table_t *create_hash_table(int keys_store_size)
     return hash_table;
 }
 
+void print_hash_table(ghash_table_t **phash_table)
+{
+    assert(phash_table != NULL);
+    assert(*phash_table != NULL);
+
+    printf("CONSIDER REDIRECTING THE OUTPUT TO A TXT FILE");
+
+    for (int i = 0; i < (*phash_table)->keys_store_length; ++i)
+    {
+        printf("\n[--------------------------------------------------------]\n");
+        printf("When hash = %i, values are as follows : \n", i);
+        print_glist(&(*phash_table)->keys_store[i], &print_str);
+    }
+}
+
 void destroy_hash_table(ghash_table_t **phash_table)
 {
     assert(phash_table != NULL);
@@ -68,7 +83,7 @@ void insertTo_hash_table(ghash_table_t **phash_table, char *data)
     // start with a length equal to the data length, which is a maximum since it contains space+new_line
     char temp[strlen(data)];
 
-    int i;
+    int i = 0;
     while (i < strlen(data))
     {
         //  insert till hitting a non alphabatical character

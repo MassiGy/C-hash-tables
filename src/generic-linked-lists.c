@@ -45,11 +45,12 @@ void push_glist(glist_t **head, void *val, size_t val_size)
 void print_glist(glist_t **head, void (*printer)(void *data))
 {
     assert(head != NULL);
-    assert(*head != NULL);
+    if (*head == NULL)
+        return;
 
     glist_t *traversal = *head;
 
-    while (traversal!= NULL)
+    while (traversal != NULL)
     {
         (*printer)(traversal->data);
         traversal = traversal->next;
@@ -94,7 +95,7 @@ bool searchIn_glist(glist_t **head, void *data, int (*cmp)(void *first, void *se
 
     glist_t *traversal = *head;
 
-    while (traversal!= NULL)
+    while (traversal != NULL)
     {
         // compare the elements
         if ((*cmp)(traversal->data, data) == 0)

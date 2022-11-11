@@ -23,7 +23,6 @@ So the lenght will be something like this: ((int) "zx20") - 20 * ((int) 'a') ~ 5
 // define the offset = ord('a');
 #define ORD_OFFSET 97
 
-
 // since our linked lists are generic, our hash tables will inherit this behaviour
 struct ghash_table
 {
@@ -35,6 +34,7 @@ typedef struct ghash_table ghash_table_t;
 
 ghash_table_t *create_hash_table(int keys_store_size);
 void destroy_hash_table(ghash_table_t **phash_table);
+void print_hash_table(ghash_table_t **phash_table);
 void loadTo_hash_table(ghash_table_t **phash_table, const char *filename); // the file will contains our words
 int get_hash_key(char *data);                                              // the key will be our array index for the given data
 void insertTo_hash_table(ghash_table_t **phash_table, char *data);

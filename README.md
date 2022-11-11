@@ -1,4 +1,4 @@
-## C Generic Hash Tables
+## C Hash Tables
 
 #### File structure
 

@@ -10,18 +10,19 @@ the ordinal representation in the english words and the smallest one.
 Since, we will deal only with lowercase caracters, we assume that the lowest ordinal value will be attributed to the word "a"
 and we assume that the beggest one will be attributed to this hypotherical word "zzzzzzzzzzzz" ("z" 20 times)
 
-So the lenght will be something like this: (int) "zx20" - (int) 'a' ~ 2350
+So the lenght will be something like this: ((int) "zx20") - 20 * ((int) 'a') ~ 500
 
 */
 
 #include "./sys_headers.h"
 #include "./generic-linked-lists.h"
 
-// So the lenght will be something like this: (int) "zx20" - (int) 'a' ~ 2350
-#define KEYS_STORE_LENGTH 2350
+// So the lenght will be something like this: ((int) "zx20") - 20 * ((int) 'a') ~ 500
+#define KEYS_STORE_LENGTH 500
 
 // define the offset = ord('a');
 #define ORD_OFFSET 97
+
 
 // since our linked lists are generic, our hash tables will inherit this behaviour
 struct ghash_table

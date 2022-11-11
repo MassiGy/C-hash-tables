@@ -11,6 +11,7 @@ typedef struct Node glist_t;
 
 /** CRUD OPERATIONS */
 void push_glist(glist_t **head, void *val, size_t val_size);
+void print_glist(glist_t **head, void (*printer)(void * data));
 void updateAt(glist_t **head, int pos, void *val, size_t val_size);
 void destroy_glist(glist_t **head);
 bool searchIn_glist(glist_t **head, void * data,int (*cmp)(void * first, void * second));
@@ -26,6 +27,7 @@ void bubble_sort_glist(glist_t **head, int length, int (*cmp)(void *first, void 
 
 /** HELPERS */
 void swap_glist_str(glist_t *first, glist_t *second);
+void print_str(char * data);
 
 /** TO DEBUG*/
 // void copy_glist(glist_t **dest, glist_t **src); // does not work

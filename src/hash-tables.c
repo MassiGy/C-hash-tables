@@ -43,10 +43,12 @@ int get_hash_key(char *data)
 
     for (int i = 0; data[i] != '\0'; ++i)
     {
-        char_ords_sum += (int)data[i];
+        if ((int)data[i] >= (int)'a' && (int)data[i] <= (int)'z')
+        {
+            char_ords_sum += (int)data[i];
+            char_ords_sum -= ORD_OFFSET;
+        }
     }
-
-    char_ords_sum -= ORD_OFFSET;
 
     assert(char_ords_sum <= KEYS_STORE_LENGTH);
     return char_ords_sum;
@@ -60,12 +62,25 @@ void insertTo_hash_table(ghash_table_t **phash_table, char *data)
 
     int hash = get_hash_key(data);
 
-    char buffer[strlen(data) + 1];
+    // This will be the error correction, since the data is structred as follows : str+space+new_line
+    // so, to get the comparaison resault correct, we need to remove the space+new_line
 
-    strcpy(buffer, data);
-    buffer[strlen(data)] = '\0';
+    // start with a length equal to the data length, which is a maximum since it contains space+new_line
+    char temp[strlen(data)];
 
-    push_glist(&((*phash_table)->keys_store[hash]), data, strlen(data) + 1);
+    int i;
+    while (i < strlen(data))
+    {
+        //  insert till hitting a non alphabatical character
+        if (!((int)data[i] >= 'a' && (int)data[i] <= 'z'))
+            break;
+
+        temp[i] = data[i];
+        i++;
+    }
+    temp[i] = '\0';
+
+    push_glist(&((*phash_table)->keys_store[hash]), temp, strlen(temp) + 1);
 }
 
 // the file will contains our words
@@ -79,19 +94,11 @@ void loadTo_hash_table(ghash_table_t **phash_table, const char *filename)
     assert(file != NULL);
 
     char buffer[34];
-    char *data;
 
     while (!feof(file))
     {
         fgets(buffer, 32, file);
-
-        data = malloc((strlen(buffer) + 1) * sizeof(char));
-
-        data[strlen(buffer)] = '\0';
-
-        insertTo_hash_table(phash_table, data);
-
-        free(data);
+        insertTo_hash_table(phash_table, buffer);
     }
 
     fclose(file);
